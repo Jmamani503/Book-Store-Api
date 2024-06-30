@@ -3,7 +3,6 @@ package com.booknest.infrastructure.adapter.input.rest.mapper;
 import com.booknest.domain.model.Book;
 import com.booknest.infrastructure.adapter.input.rest.model.request.BookCreateRequest;
 import com.booknest.infrastructure.adapter.input.rest.model.response.BookResponse;
-import com.booknest.infrastructure.adapter.output.persistence.entity.BookEntity;
 import org.springframework.stereotype.Component;
 
 @Component

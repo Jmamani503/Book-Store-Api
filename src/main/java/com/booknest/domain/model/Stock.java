@@ -1,7 +1,6 @@
 package com.booknest.domain.model;
 
 import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
