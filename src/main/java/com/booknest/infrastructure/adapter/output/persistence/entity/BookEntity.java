@@ -27,4 +27,6 @@ public class BookEntity {
     private double price;
     private String image;
     private String description;
+    @OneToOne(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private StockEntity stockEntity;
 }

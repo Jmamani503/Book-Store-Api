@@ -1,6 +1,7 @@
 package com.booknest.infrastructure.adapter.input.rest;
 
 import com.booknest.domain.exception.BookNotFoundException;
+import com.booknest.domain.exception.StockAlreadyExistsException;
 import com.booknest.domain.model.ErrorResponse;
 import com.booknest.domain.util.ErrorCatalog;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -22,8 +23,17 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(BookNotFoundException.class)
     public ErrorResponse handleContentNotFound(){
         return ErrorResponse.builder()
-                .code(ErrorCatalog.CONTENT_NOT_FOUND.getCode())
-                .message(ErrorCatalog.CONTENT_NOT_FOUND.getMessage())
+                .code(ErrorCatalog.BOOK_NOT_FOUND.getCode())
+                .message(ErrorCatalog.BOOK_NOT_FOUND.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(StockAlreadyExistsException.class)
+    public ErrorResponse handleStockAlreadyExistsException(){
+        return ErrorResponse.builder()
+                .code(ErrorCatalog.STOCK_CONFLICT.getCode())
+                .message(ErrorCatalog.STOCK_CONFLICT.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
     }
