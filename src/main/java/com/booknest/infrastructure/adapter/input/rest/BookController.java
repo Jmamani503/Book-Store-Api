@@ -1,25 +1,25 @@
 package com.booknest.infrastructure.adapter.input.rest;
 
 import com.booknest.application.port.input.BookServicePort;
-import com.booknest.infrastructure.adapter.input.rest.mapper.BookRestMapper;
+import com.booknest.infrastructure.adapter.input.rest.mapper.RestBookMapper;
 import com.booknest.infrastructure.adapter.input.rest.model.request.BookCreateRequest;
 import com.booknest.infrastructure.adapter.input.rest.model.response.BookResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
 
     private final BookServicePort service;
-    private final BookRestMapper mapper;
-    public BookController(BookServicePort service, BookRestMapper mapper) {
+    private final RestBookMapper mapper;
+    public BookController(BookServicePort service, RestBookMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }
@@ -37,7 +37,9 @@ public class BookController {
 
     @GetMapping
     public List<BookResponse> getAllBook(){
-        return mapper.toBookResponseList(service.getAllBooks());
+        return service.getAllBooks().stream()
+                .map(mapper::toBookResponse)
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
