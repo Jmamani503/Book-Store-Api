@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -19,7 +18,9 @@ public class BookController {
 
     private final BookServicePort service;
     private final RestBookMapper mapper;
+  
     public BookController(BookServicePort service, RestBookMapper mapper) {
+
         this.service = service;
         this.mapper = mapper;
     }

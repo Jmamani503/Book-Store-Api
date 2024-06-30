@@ -1,5 +1,4 @@
 package com.booknest.domain.model;
-
 import lombok.*;
 
 import java.time.LocalDateTime;
