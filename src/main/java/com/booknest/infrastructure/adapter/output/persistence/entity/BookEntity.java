@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -27,6 +26,10 @@ public class BookEntity {
     private double price;
     private String image;
     private String description;
-    @OneToOne(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(
+            mappedBy = "bookEntity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private StockEntity stockEntity;
 }

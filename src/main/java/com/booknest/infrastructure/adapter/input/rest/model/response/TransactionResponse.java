@@ -1,19 +1,21 @@
-package com.booknest.domain.model;
+package com.booknest.infrastructure.adapter.input.rest.model.response;
 
 import lombok.*;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
 @Builder
-public class Transaction {
+public class TransactionResponse {
+
     private UUID id;
-    private TransactionType type;
+    private String type;
     private int quantity;
     private LocalDateTime transactionDate;
     private String note;
-    private Stock stock;
+    private StockResponse stockResponse;
 }

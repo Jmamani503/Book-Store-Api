@@ -6,14 +6,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PersistenceStockMapper {
-
     private final PersistenceBookMapper bookMapper;
     public PersistenceStockMapper(PersistenceBookMapper bookMapper) {
         this.bookMapper = bookMapper;
     }
 
     public Stock toStock(StockEntity stockEntity){
-        System.out.println(stockEntity.getBookEntity().getId());
         return Stock.builder()
                 .id(stockEntity.getId())
                 .quantity(stockEntity.getQuantity())

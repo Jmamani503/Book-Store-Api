@@ -17,7 +17,10 @@ public class BookPersistanceAdapter implements BookPersistencePort {
     private final BookRepository repository;
     private final PersistenceBookMapper mapper;
 
-    public BookPersistanceAdapter(BookRepository repository, PersistenceBookMapper mapper) {
+    public BookPersistanceAdapter(
+        BookRepository repository,
+        PersistenceBookMapper mapper
+    ) {
         this.repository = repository;
         this.mapper = mapper;
     }

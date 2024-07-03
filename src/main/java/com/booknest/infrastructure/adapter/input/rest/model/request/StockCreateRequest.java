@@ -13,6 +13,7 @@ import java.util.UUID;
 @Setter
 @Builder
 public class StockCreateRequest {
+
     @NotNull(message = "Field quantity connnot be null or empty")
     private int quantity;
     @NotNull(message = "Field minQuantity connnot be null or empty")

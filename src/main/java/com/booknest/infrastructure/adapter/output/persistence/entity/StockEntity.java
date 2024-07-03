@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -24,6 +25,19 @@ public class StockEntity {
     private int maxQuantity;
     private LocalDateTime lastUpdated;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @JoinColumn(
+            name = "book_id",
+            referencedColumnName = "id"
+    )
     private BookEntity bookEntity;
+    @OneToMany(
+            mappedBy = "stockEntity",
+            fetch = FetchType.LAZY
+    )
+    private List<TransactionEntity> transactionEntities;
+
+    public void addTransaction(TransactionEntity transactionEntity) {
+        transactionEntities.add(transactionEntity);
+        transactionEntity.setStockEntity(this);
+    }
 }

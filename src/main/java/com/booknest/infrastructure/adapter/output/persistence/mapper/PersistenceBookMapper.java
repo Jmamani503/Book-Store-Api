@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 public class PersistenceBookMapper {
 
     public Book toBook(BookEntity bookEntity){
-        System.out.println(bookEntity.getPublisher());
         return Book.builder()
                 .id(bookEntity.getId())
                 .title(bookEntity.getTitle())

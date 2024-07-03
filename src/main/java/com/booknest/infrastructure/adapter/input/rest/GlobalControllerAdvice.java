@@ -1,7 +1,6 @@
 package com.booknest.infrastructure.adapter.input.rest;
 
-import com.booknest.domain.exception.BookNotFoundException;
-import com.booknest.domain.exception.StockAlreadyExistsException;
+import com.booknest.domain.exception.*;
 import com.booknest.domain.model.ErrorResponse;
 import com.booknest.domain.util.ErrorCatalog;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -28,6 +27,15 @@ public class GlobalControllerAdvice {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(StockNotFoundException.class)
+    public ErrorResponse handleStockNotFound(){
+        return ErrorResponse.builder()
+                .code(ErrorCatalog.STOCK_NOT_FOUND.getCode())
+                .message(ErrorCatalog.STOCK_NOT_FOUND.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(StockAlreadyExistsException.class)
     public ErrorResponse handleStockAlreadyExistsException(){
@@ -49,6 +57,24 @@ public class GlobalControllerAdvice {
                         .stream()
                         .map(DefaultMessageSourceResolvable::getDefaultMessage)
                         .collect(Collectors.toList()))
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(StockExceededException.class)
+    public ErrorResponse handleStockExceeded(){
+        return ErrorResponse.builder()
+                .code(ErrorCatalog.STOCK_EXCEEDED.getCode())
+                .message(ErrorCatalog.STOCK_EXCEEDED.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotEnoughBooksException.class)
+    public ErrorResponse handleNotEnoughStock(){
+        return ErrorResponse.builder()
+                .code(ErrorCatalog.NOT_ENOUGH_STOCK.getCode())
+                .message(ErrorCatalog.NOT_ENOUGH_STOCK.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
     }

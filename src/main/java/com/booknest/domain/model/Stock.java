@@ -16,4 +16,11 @@ public class Stock {
     private int maxQuantity;
     private LocalDateTime lastUpdated;
     private Book book;
+
+    public boolean canPurchase(){
+        return quantity <= maxQuantity;
+    }
+    public boolean canSell(int quantityChange){
+        return quantity - quantityChange >= 0;
+    }
 }

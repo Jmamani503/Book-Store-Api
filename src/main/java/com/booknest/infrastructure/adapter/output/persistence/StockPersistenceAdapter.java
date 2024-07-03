@@ -2,7 +2,10 @@ package com.booknest.infrastructure.adapter.output.persistence;
 
 import com.booknest.application.port.output.StockPersistencePort;
 import com.booknest.domain.model.Stock;
+import com.booknest.domain.model.Transaction;
+import com.booknest.infrastructure.adapter.output.persistence.entity.StockEntity;
 import com.booknest.infrastructure.adapter.output.persistence.mapper.PersistenceStockMapper;
+import com.booknest.infrastructure.adapter.output.persistence.mapper.PersistenceTransactionMapper;
 import com.booknest.infrastructure.adapter.output.persistence.repository.StockRepository;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +20,12 @@ public class StockPersistenceAdapter implements StockPersistencePort {
     private final StockRepository repository;
     private final PersistenceStockMapper mapper;
 
-    public StockPersistenceAdapter(StockRepository repository, PersistenceStockMapper mapper) {
+    public StockPersistenceAdapter(
+        StockRepository repository,
+        PersistenceStockMapper mapper
+    ) {
         this.mapper = mapper;
         this.repository = repository;
-
     }
 
     @Override

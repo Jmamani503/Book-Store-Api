@@ -11,9 +11,7 @@ import java.util.UUID;
 
 @Service
 public class BookService implements BookServicePort {
-
     private final BookPersistencePort persistence;
-
     public BookService(BookPersistencePort persistence) {
         this.persistence = persistence;
     }
