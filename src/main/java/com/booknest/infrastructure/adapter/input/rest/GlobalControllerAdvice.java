@@ -1,6 +1,9 @@
 package com.booknest.infrastructure.adapter.input.rest;
 
+
 import com.booknest.domain.exception.*;
+import com.booknest.domain.exception.BookNotFoundException;
+import com.booknest.domain.exception.StockAlreadyExistsException;
 import com.booknest.domain.model.ErrorResponse;
 import com.booknest.domain.util.ErrorCatalog;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
