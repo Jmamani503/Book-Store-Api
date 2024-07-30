@@ -19,6 +19,8 @@ public class TransactionCreateRequest {
     private String type;
     @NotNull(message = "Field quantity cannot be null")
     private int quantity;
+    @NotNull(message = "Field price cannot be null")
+    private double price;
     private String note;
     @NotNull(message = "Field idStock cannot be null or empty")
     private UUID idStock;

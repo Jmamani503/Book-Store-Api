@@ -38,12 +38,8 @@ public class BookService implements BookServicePort {
                 .map(updatedBook -> {
                     updatedBook.setTitle(book.getTitle());
                     updatedBook.setAuthor(book.getAuthor());
-                    updatedBook.setGenre(book.getGenre());
-                    updatedBook.setPublisher(book.getPublisher());
-                    updatedBook.setPublishedDate(book.getPublishedDate());
-                    updatedBook.setPrice(book.getPrice());
+                    updatedBook.setGenres(book.getGenres());
                     updatedBook.setImage(book.getImage());
-                    updatedBook.setDescription(book.getDescription());
                     return persistence.save(updatedBook);
                 })
                 .orElseThrow(BookNotFoundException::new);

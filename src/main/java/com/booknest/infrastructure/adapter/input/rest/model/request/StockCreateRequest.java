@@ -1,11 +1,9 @@
 package com.booknest.infrastructure.adapter.input.rest.model.request;
 
-import com.booknest.domain.model.Book;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,13 +11,14 @@ import java.util.UUID;
 @Setter
 @Builder
 public class StockCreateRequest {
-
-    @NotNull(message = "Field quantity connnot be null or empty")
-    private int quantity;
-    @NotNull(message = "Field minQuantity connnot be null or empty")
+    @NotNull(message = "Field minQuantity cannot be null")
     private int minQuantity;
-    @NotNull(message = "Field maxQuantity connnot be null or empty")
+    @NotNull(message = "Field maxQuantity cannot be null")
     private int maxQuantity;
-    @NotNull(message = "Field idBook connnot be null or empty")
+    @NotNull(message = "Field markup cannot be null")
+    private  double markup;
+    @NotNull(message = "Field idBook cannot be blank")
     private UUID idBook;
+    @NotBlank(message = "Field description cannot be blank")
+    private String description;
 }

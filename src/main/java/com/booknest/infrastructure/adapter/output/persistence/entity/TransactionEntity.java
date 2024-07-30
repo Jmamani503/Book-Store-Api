@@ -23,8 +23,10 @@ public class TransactionEntity {
     private UUID id;
     private String type;
     private int quantity;
+    private double price;
     private LocalDateTime transactionDate;
     private String note;
+    private int beforeTransaction;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stock_id")
     private StockEntity stockEntity;

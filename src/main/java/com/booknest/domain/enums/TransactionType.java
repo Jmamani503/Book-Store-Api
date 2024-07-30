@@ -1,4 +1,4 @@
-package com.booknest.domain.model;
+package com.booknest.domain.enums;
 
 import lombok.Getter;
 

@@ -29,18 +29,8 @@ public class TransactionService implements TransactionServicePort {
     public Transaction createTransaction(Transaction transaction) {
         Stock stock = stockPersistence.findById(transaction.getStock().getId())
                 .orElseThrow(StockNotFoundException::new);
-        switch (transaction.getType()) {
-            case STOCK_IN -> {
-                if (!stock.canPurchase()) throw new StockExceededException();
-                stock.setQuantity(stock.getQuantity() + transaction.getQuantity());
-            }
-            case STOCK_OUT -> {
-                if (!stock.canSell(transaction.getQuantity())) throw new NotEnoughBooksException();
-                stock.setQuantity(stock.getQuantity() - transaction.getQuantity());
-            }
-            default -> throw new IllegalArgumentException("Invalid transaction type");
-        }
-        stock.setLastUpdated(LocalDateTime.now());
+        transaction.setBeforeTransaction(stock.getQuantity());
+        stock.updateStockQuantity(transaction);
         stockPersistence.save(stock);
         transaction.setStock(stock);
         transaction.setTransactionDate(LocalDateTime.now());
@@ -64,8 +54,8 @@ public class TransactionService implements TransactionServicePort {
                 .map(updatedTransaction -> {
                     updatedTransaction.setType(transaction.getType());
                     updatedTransaction.setQuantity(transaction.getQuantity());
-                    updatedTransaction.setNote(transaction.getNote());
                     updatedTransaction.setTransactionDate(transaction.getTransactionDate());
+                    updatedTransaction.setNote(transaction.getNote());
                     return persistence.save(updatedTransaction);
                 })
                 .orElseThrow(TransactionNotFoundException::new);
@@ -73,11 +63,18 @@ public class TransactionService implements TransactionServicePort {
 
     @Override
     public void deleteTransaction(UUID id) {
+        if (persistence.findById(id).isEmpty()){
+            throw new TransactionNotFoundException();
+        }
         persistence.deleteById(id);
     }
 
     @Override
     public List<Transaction> getAllTransactionByStock(UUID stockId) {
-        return persistence.findAllTransactionsByStock(stockId);
+        if (stockPersistence.findById(stockId).isEmpty()){
+            throw new StockNotFoundException();
+        }else {
+            return persistence.findAllTransactionsByStock(stockId);
+        }
     }
 }

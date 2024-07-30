@@ -12,12 +12,8 @@ public class PersistenceBookMapper {
                 .id(bookEntity.getId())
                 .title(bookEntity.getTitle())
                 .author(bookEntity.getAuthor())
-                .genre(bookEntity.getGenre())
-                .publisher(bookEntity.getPublisher())
-                .publishedDate(bookEntity.getPublishedDate())
-                .price(bookEntity.getPrice())
+                .genres(bookEntity.getGenreEnumSet())
                 .image(bookEntity.getImage())
-                .description(bookEntity.getDescription())
                 .build();
     }
     public BookEntity toBookEntity(Book book){
@@ -25,12 +21,8 @@ public class PersistenceBookMapper {
         bookEntity.setId(book.getId());
         bookEntity.setTitle(book.getTitle());
         bookEntity.setAuthor(book.getAuthor());
-        bookEntity.setGenre(book.getGenre());
-        bookEntity.setPublisher(book.getPublisher());
-        bookEntity.setPublishedDate(book.getPublishedDate());
-        bookEntity.setPrice(book.getPrice());
+        bookEntity.setGenres(book.getStringGenres());
         bookEntity.setImage(book.getImage());
-        bookEntity.setDescription(book.getDescription());
         return bookEntity;
     }
 }

@@ -2,7 +2,7 @@ package com.booknest.infrastructure.adapter.input.rest.model.response;
 
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -11,14 +11,9 @@ import java.util.UUID;
 @Setter
 @Builder
 public class BookResponse {
-
     private UUID id;
     private String title;
     private String author;
-    private String genre;
-    private String publisher;
-    private LocalDate publishedDate;
-    private double price;
     private String image;
-    private String description;
+    private Set<String> genres;
 }

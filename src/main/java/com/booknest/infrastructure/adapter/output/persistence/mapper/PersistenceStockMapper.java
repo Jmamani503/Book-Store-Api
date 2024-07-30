@@ -17,7 +17,15 @@ public class PersistenceStockMapper {
                 .quantity(stockEntity.getQuantity())
                 .minQuantity(stockEntity.getMinQuantity())
                 .maxQuantity(stockEntity.getMaxQuantity())
-                .lastUpdated(stockEntity.getLastUpdated())
+                .salePrice(stockEntity.getSalePrice())
+                .purchasePrice(stockEntity.getPurchasePrice())
+                .markup(stockEntity.getMarkup())
+                .totalSales(stockEntity.getTotalSales())
+                .totalPurchases(stockEntity.getTotalPurchases())
+                .totalSpending(stockEntity.getTotalSpending())
+                .totalEarnings(stockEntity.getTotalEarnings())
+                .description(stockEntity.getDescription())
+                .lastModified(stockEntity.getLastUpdated())
                 .book(bookMapper.toBook(stockEntity.getBookEntity()))
                 .build();
     }
@@ -28,7 +36,15 @@ public class PersistenceStockMapper {
         stockEntity.setQuantity(stock.getQuantity());
         stockEntity.setMinQuantity(stock.getMinQuantity());
         stockEntity.setMaxQuantity(stock.getMaxQuantity());
-        stockEntity.setLastUpdated(stock.getLastUpdated());
+        stockEntity.setPurchasePrice(stock.getPurchasePrice());
+        stockEntity.setSalePrice(stock.getSalePrice());
+        stockEntity.setMarkup(stock.getMarkup());
+        stockEntity.setTotalSales(stock.getTotalSales());
+        stockEntity.setTotalPurchases(stock.getTotalPurchases());
+        stockEntity.setTotalEarnings(stock.getTotalEarnings());
+        stockEntity.setTotalSpending(stock.getTotalSpending());
+        stockEntity.setDescription(stock.getDescription());
+        stockEntity.setLastUpdated(stock.getLastModified());
         stockEntity.setBookEntity(bookMapper.toBookEntity(stock.getBook()));
         return stockEntity;
     }

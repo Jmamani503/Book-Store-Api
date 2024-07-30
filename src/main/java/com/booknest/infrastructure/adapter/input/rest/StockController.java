@@ -3,6 +3,7 @@ package com.booknest.infrastructure.adapter.input.rest;
 import com.booknest.application.port.input.StockServicePort;
 import com.booknest.infrastructure.adapter.input.rest.mapper.RestStockMapper;
 import com.booknest.infrastructure.adapter.input.rest.model.request.StockCreateRequest;
+import com.booknest.infrastructure.adapter.input.rest.model.response.StockDetailsResponse;
 import com.booknest.infrastructure.adapter.input.rest.model.response.StockResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -35,8 +36,8 @@ public class StockController {
                         ));
     }
     @GetMapping("/{id}")
-    public StockResponse getStock(@PathVariable UUID id){
-        return mapper.toStockResponse(service.getStock(id));
+    public StockDetailsResponse getStock(@PathVariable UUID id){
+        return mapper.toStockDetailsResponse(service.getStock(id));
     }
     @GetMapping
     public List<StockResponse> getAllStocks(){

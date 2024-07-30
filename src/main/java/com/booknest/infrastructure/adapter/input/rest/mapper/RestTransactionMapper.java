@@ -2,7 +2,7 @@ package com.booknest.infrastructure.adapter.input.rest.mapper;
 
 import com.booknest.domain.model.Stock;
 import com.booknest.domain.model.Transaction;
-import com.booknest.domain.model.TransactionType;
+import com.booknest.domain.enums.TransactionType;
 import com.booknest.infrastructure.adapter.input.rest.model.request.TransactionCreateRequest;
 import com.booknest.infrastructure.adapter.input.rest.model.response.TransactionResponse;
 import org.springframework.stereotype.Component;
@@ -21,8 +21,10 @@ public class RestTransactionMapper {
                 .id(transaction.getId())
                 .type(transaction.getType().toString())
                 .quantity(transaction.getQuantity())
+                .price(transaction.getPrice())
                 .transactionDate(transaction.getTransactionDate())
                 .note(transaction.getNote())
+                .beforeTransaction(transaction.getBeforeTransaction())
                 .stockResponse(stockMapper.toStockResponse(transaction.getStock()))
                 .build();
     }
@@ -33,6 +35,7 @@ public class RestTransactionMapper {
         return Transaction.builder()
                 .type(TransactionType.fromString(transactionCreateRequest.getType()))
                 .quantity(transactionCreateRequest.getQuantity())
+                .price(transactionCreateRequest.getPrice())
                 .note(transactionCreateRequest.getNote())
                 .stock(stock)
                 .build();

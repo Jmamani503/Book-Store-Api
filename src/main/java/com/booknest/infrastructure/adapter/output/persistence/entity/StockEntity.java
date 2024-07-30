@@ -23,13 +23,19 @@ public class StockEntity {
     private int quantity;
     private int minQuantity;
     private int maxQuantity;
+    private double purchasePrice;
+    private double salePrice;
+    private double markup;
+    private int totalSales;
+    private int totalPurchases;
+    private double totalSpending;
+    private double totalEarnings;
+    private String description;
     private LocalDateTime lastUpdated;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "book_id",
-            referencedColumnName = "id"
-    )
+    @ManyToOne
+    @JoinColumn(name = "book_id")
     private BookEntity bookEntity;
+
     @OneToMany(
             mappedBy = "stockEntity",
             fetch = FetchType.LAZY

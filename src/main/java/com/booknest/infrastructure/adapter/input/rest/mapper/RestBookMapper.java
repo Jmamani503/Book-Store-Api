@@ -11,12 +11,8 @@ public class RestBookMapper {
         return Book.builder()
                 .title(bookResponse.getTitle())
                 .author(bookResponse.getAuthor())
-                .genre(bookResponse.getGenre())
-                .publisher(bookResponse.getPublisher())
-                .publishedDate(bookResponse.getPublishedDate())
-                .price(bookResponse.getPrice())
+                .genres(bookResponse.getGenresEnumSet())
                 .image(bookResponse.getImage())
-                .description(bookResponse.getDescription())
                 .build();
     }
     public BookResponse toBookResponse(Book book){
@@ -24,12 +20,8 @@ public class RestBookMapper {
                 .id(book.getId())
                 .title(book.getTitle())
                 .author(book.getAuthor())
-                .genre(book.getGenre())
-                .publisher(book.getPublisher())
-                .publishedDate(book.getPublishedDate())
-                .price(book.getPrice())
+                .genres(book.getStringGenres())
                 .image(book.getImage())
-                .description(book.getDescription())
                 .build();
     }
 }

@@ -6,6 +6,7 @@ import com.booknest.application.port.output.StockPersistencePort;
 import com.booknest.domain.exception.BookNotFoundException;
 import com.booknest.domain.exception.StockAlreadyExistsException;
 import com.booknest.domain.exception.StockNotFoundException;
+import com.booknest.domain.model.Book;
 import com.booknest.domain.model.Stock;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -26,14 +27,10 @@ public class StockService implements StockServicePort {
 
     @Override
     public Stock createStock(Stock stock) {
-        if(persistence.findByBookEntityId(stock.getBook().getId()).isPresent()){
-            throw  new StockAlreadyExistsException();
-        }
-        stock.setBook(bookPersistence.findById(
-                stock.getBook().getId())
-                .orElseThrow(BookNotFoundException::new)
-        ) ;
-        stock.setLastUpdated(LocalDateTime.now());
+        Book book = bookPersistence.findById(stock.getBook().getId())
+                .orElseThrow(BookNotFoundException::new);
+        stock.setBook(book);
+        stock.setLastModified(LocalDateTime.now());
         return persistence.save(stock);
     }
 
@@ -52,10 +49,11 @@ public class StockService implements StockServicePort {
     public Stock updateStock(UUID id, Stock stock) {
         return persistence.findById(id)
                 .map(updatedStock -> {
-                    updatedStock.setBook(stock.getBook());
-                    updatedStock.setQuantity(stock.getQuantity());
                     updatedStock.setMaxQuantity(stock.getMaxQuantity());
                     updatedStock.setMinQuantity(stock.getMinQuantity());
+                    updatedStock.setLastModified(LocalDateTime.now());
+                    updatedStock.setMarkup(stock.getMarkup());
+                    updatedStock.setDescription(stock.getDescription());
                     return persistence.save(updatedStock);
                 })
                 .orElseThrow(StockNotFoundException::new);
@@ -63,6 +61,9 @@ public class StockService implements StockServicePort {
 
     @Override
     public void deleteStock(UUID id) {
+        if (persistence.findById(id).isEmpty()){
+            throw new StockNotFoundException();
+        }
         persistence.deleteById(id);
     }
 }
